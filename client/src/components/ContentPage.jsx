@@ -2,13 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 import { useState } from 'react';
+import { setQuizData,quizData } from './quizData'; 
+
 function ContentPage() {
 
 //  Quiz Generation
 const [quizSearch,setQuizSearch]=useState("");
-
 // const [toQuiz,setToQuiz]=useState(0);
-    const [obj,setobj]=useState({});
+    const [obj,setobj]=useState({"user":"Hello"});
     const [userSearch,setUserSearch]=useState("hello");
     const [content,setContent]=useState("");
     const MODEL_NAME = "gemini-pro";
@@ -39,32 +40,23 @@ const [quizSearch,setQuizSearch]=useState("");
         safetySettings,
       });
     
-      const response = result.response;
+      const response =await result.response;
       if(type==="Content"){
+      
         setContent(response.text());
         // console.log(response.text());
       }
       else{
-        let newString = response.text();
-        // setContent(response.text());
-        console.log(newString);
-        
+        let newString =await response.text();
+    
         const cur_json=JSON.parse(newString);
     
-        // setobj(cur_json);
-       const content=cur_json;  
-       setobj(cur_json);  
-       content.Questions.forEach((item,index)=>{
-        const ques=`Question ${index+1}: ${item.Question}`;
-         const ans=`answer :${item.Correct_Answer}`;
-         console.log(ques);
-          
-         item.Options.forEach((curOption,index1)=>{
-          console.log(`${String.fromCharCode(97+index1) })  ${curOption}`);
-         })
+        console.log(cur_json);
         
-        //  console.log(ans);
-     })
+        setobj(cur_json);
+       const content=cur_json;  
+
+       setQuizData(cur_json);
 
       }
      
@@ -72,11 +64,11 @@ const [quizSearch,setQuizSearch]=useState("");
     
     const handleSubmit=()=>{
      run(userSearch,"Content");
-     setQuizSearch(`Generate 4 medium-level MCQ questions on ${userSearch} along with options. Also, mention the correct answer at the end of all questions along with the question number. Please generate questions and answers in the JSON format given below:'Question: .....Options: ....Correct_Answer: ....'ALERT: Don't use any markdowns. Give output in JSON format. Enclose all the questions in an additional curly brace.`)
+  
+     console.log(quizSearch); 
      run(quizSearch,"Quiz")
-     setUserSearch("");
-     quizSearch("");
-
+    //  setUserSearch("");
+     setQuizData(obj);
     }
    
     
@@ -84,22 +76,30 @@ const [quizSearch,setQuizSearch]=useState("");
   return (
     <>
     {/* <div>Hello World</div> */}
-     <div>
-      <input type="text" 
-        onInput={(e)=>setUserSearch(e.target.value)}      
+     <div className='container-content'>
+       <textarea  name="postContent" 
+               rows={40}
+               cols={40}
+              value={content} // ...force the input's value to match the state variable...
+              onChange={(e) => setContent(e.target.value)} 
+              className="text-area"
+              readOnly
+            />
+            <div className='input-container'>
+      <input type="text" className="input-area"
+        onInput={(e)=>{
+          setUserSearch(e.target.value)
+          setQuizSearch(`Generate 4 medium-level MCQ questions on ${e.target.value} along with options. Also, mention the correct answer at the end of all questions along with the question number. Please generate questions and answers in the JSON format given below:'Question: .....Options: ....Correct_Answer: ....'ALERT: Don't use any markdowns. Give output in JSON format. Enclose all the questions in an additional curly brace.`)
+        }}      
       />
 
       <button 
-      onClick={handleSubmit}>Submit</button>
+      onClick={handleSubmit} className="button">Submit</button>
 
- <textarea  name="postContent" 
-         rows={40}
-         cols={40}
-        value={content} // ...force the input's value to match the state variable...
-        onChange={(e) => setContent(e.target.value)} 
-
-      />
-<Link to="QuizPage" state={{ from: "obj" }} > <button type='button' >Quiz</button></Link>
+<Link to="/QuizPage">
+          <button type='button' className="button">Quiz</button>
+        </Link>
+        </div>
 </div>
     </>
   )

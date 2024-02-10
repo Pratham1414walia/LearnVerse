@@ -85,7 +85,7 @@ class NewPost extends Form {
                   <div className="alert-info">{errors.description}</div>
                 )}
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="tags">Related Tags</label>
                 <br />
                 {tags.map((tag) => (
@@ -102,7 +102,7 @@ class NewPost extends Form {
                   </React.Fragment>
                 ))}
                 {errors.tags && <div className="alert-info">{errors.tags}</div>}
-              </div>
+              </div> */}
               <div className="text-center">
                 <button
                   className="btn btn-primary mt-4"

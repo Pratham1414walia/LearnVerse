@@ -5,7 +5,7 @@ const NavBar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark  sticky-top ">
       <NavLink className="navbar-brand" to="/">
-        Community
+        LearnHub
       </NavLink>
       <button
         class="navbar-toggler"

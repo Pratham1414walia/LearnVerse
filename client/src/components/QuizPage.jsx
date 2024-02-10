@@ -1,15 +1,14 @@
 import React, { useRef, useState } from 'react'
 import "./QuizPage.css"
-import { useLocation } from 'react-router-dom'
-
-function QuizPage({data}) {
-    console.log(data);
+import { quizData } from './quizData'; 
+function QuizPage() {
+    // console.log(data);
+    const data= quizData.Questions;
+    //  console.log(data);
  const [index,setIndex]=useState(0);
  const [curQ,setcurQ]=useState(data[index]);
  const [lock,setLock]=useState(false); 
- const location = useLocation()
- const { from } = location.state
-// console.log(from);
+
  const option1=useRef(null);
  const option2=useRef(null);
  const option3=useRef(null);
@@ -17,7 +16,7 @@ function QuizPage({data}) {
 
  const option_array=[option1,option2,option3,option4]; 
  const next=()=>{
-   if(lock==true){
+   if(lock===true){
     setIndex((index)=>index+1);
     setcurQ(data[index]);
     setLock(false);
@@ -34,7 +33,7 @@ function QuizPage({data}) {
 
  const checkAns=(e,curOption,optionNo)=>{
   
-    if(lock==false){
+    if(lock===false){
       if(curQ.Correct_Answer===curOption){
         e.target.classList.add("Correct");
         
@@ -57,8 +56,10 @@ function QuizPage({data}) {
 
   return (
     <>
+
+    {/* <p>Hello  World</p> */}
       
-<div className="container">
+<div>
 
  <h1>Q{index+1} : {curQ.Question}</h1>
  <hr />
@@ -68,7 +69,7 @@ function QuizPage({data}) {
   <li ref={option3} onClick={(e)=>checkAns(e,curQ.Options[2],2)}>{curQ.Options[2]}</li>
   <li ref={option4} onClick={(e)=>checkAns(e,curQ.Options[3],3)}>{curQ.Options[3]}</li>
  </ul>
-<button onClick={next}>Next</button>
+<button onClick={next} >Next</button>
 </div>
 
     </>

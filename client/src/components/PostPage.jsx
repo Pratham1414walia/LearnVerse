@@ -148,7 +148,7 @@ class PostPage extends Component {
                     {reply.upvotes.length}
                   </button>
                   <p class="mb-1">
-                    <Moment fromNow style={{ color: "#505050" }}>
+                    <Moment fromNow style={{ color: "#505050`" }}>
                       {reply.time}
                     </Moment>
                   </p>
