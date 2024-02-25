@@ -13,7 +13,7 @@ const Posts = (props) => {
           <div className="d-flex w-100 justify-content-between" key={post._id}>
             <h5 className="mb-1">{post.title}</h5>
           </div>
-          <small>Created by {post.author.name}</small>
+          <small>Created by {post.author}</small>
           <br />
           <small className="overflow-hidden">{post.description}</small>
           <div className="mt-1">

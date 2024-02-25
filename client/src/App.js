@@ -19,6 +19,9 @@ import NavBar from "./components/navbar";
 import ProtectedRoute from "./components/common/protectedRoute";
 import PostPage from "./components/PostPage";
 
+import MappingPage from "./components/MappingPage" 
+import PdfReader from "./components/PdfReader" 
+
 class App extends Component {
   state = {};
   async componentDidMount() {
@@ -46,6 +49,14 @@ class App extends Component {
             <Route
             path="/contentPage"
             render={(props) => <ContentPage {...props} user={this.state.user} />}
+          />
+            <Route
+            path="/MappingPage"
+            render={(props) => <MappingPage {...props} user={this.state.user} />}
+          />
+            <Route
+            path="/child"
+            render={(props) => <PdfReader {...props} user={this.state.user} />}
           />
             <Route
             path="/QuizPage"

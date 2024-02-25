@@ -60,6 +60,16 @@ const NavBar = ({ user }) => {
                 </NavLink>
               </li>
               <li className="nav-item">
+                <NavLink className="nav-link" to="/MappingPage">
+                  classes
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/child">
+                  chatPDF
+                </NavLink>
+              </li>
+              <li className="nav-item">
                 <NavLink className="nav-link" to="/users/logout">
                   LogOut
                 </NavLink>

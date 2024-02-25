@@ -61,18 +61,18 @@ function validatePost(post) {
 exports.Post = Post;
 exports.validatePost = validatePost;
 
-// async function listPosts() {
-//   const users = await Post.find().select().populate('author');
-//   console.log(users);
-// }
+async function listPosts() {
+  const users = await Post.find().select().populate('author');
+  console.log(users);
+}
 
 // listPosts();
 
 // async function CreatePost() {
 //   const a = new Post({
-//     title: 'Should I learn Web Dev?',
+//     title: 'Should I learn Machine Learning?',
 //     description: 'The title explains it all',
-//     author: '6012bd5feff00735ffd93f83'
+//     author: 'Rhythm Jain'
 //   });
 //   await a.save();
 // }
