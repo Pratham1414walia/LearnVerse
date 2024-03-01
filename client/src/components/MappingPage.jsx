@@ -4,9 +4,10 @@ import { useState } from 'react';
  
 function MappingPage() {
     const[mapData,setMapData] = useState("");
+    const [location,setLocation]=useState("");
     async function showMap() {
       try {
-        const response = await fetch('http://localhost:5000/maps');
+        const response = await fetch(`http://localhost:5000/maps/${location}`);
         const data = await response.json();
         //console.log(data.results); // Process the fetched data here
         setMapData(data.results);
@@ -32,21 +33,21 @@ function MappingPage() {
 }
   return (
  <>
-    <div>
+<div>
+  <h1>Search for classes near you</h1>
+       <input type="text" className="input-area"
+                onInput={(e)=>setLocation(e.target.value)}
+         />
+           <button onClick={handleSubmit} className="button">Submit</button>
       {mapData?.length ?(mapData.map(createCard)
  
  ) : (
    <>
-           <h1>Search for classes near you</h1>
            </>
           )
         }
 
     </div>
-    <input type="text" className="input-area"
-             
-      />
-        <button onClick={handleSubmit} className="button">Submit</button>
  </>
   );
 }

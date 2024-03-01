@@ -46,11 +46,11 @@ const port = process.env.PORT || 4000;
 
 // app.use(express.json());
 
-app.get('/maps', async (req, res) => {
+app.get('/maps/:id', async (req, res) => {
   try {
-    const { query } = req.query;
-    const apiKey = 'PUT YOUR GOOGLE MAPS API KEY';
-    const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=tuitions%Allahabad&key=${apiKey}`;
+    const cur_query  = req.params.id;
+    const apiKey = 'AIzaSyD1KzPVczfukgP7hXaijUcgQ7NaZv9yqfY';
+    const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=tuitions%${cur_query}&key=${apiKey}`;
     const response = await fetch(url);
     const data = await response.json();
     res.json(data);

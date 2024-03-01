@@ -3,8 +3,6 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 
-
-
 function PdfReader() {
   const[pdfdata,setPdfData] = useState("");
   async function showResult() {
