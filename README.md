@@ -13,5 +13,5 @@ A disscussion forum built using ReactJS, NodeJS and MongoDB.
 
 ## Installation - 
 
-- Redirect to `/server` and run `$ npm run dev` in terminal. The server will start on port 5000 and gets connected to mongoDB.
+- Redirect to `/server` and run `$ npm run dev` in terminal. The server will start on port 5000 and gets connected to MongoDB.
 - Now, in another terminal, redirect to `client` and run `$ npm start`. It will start the client side of the application.
